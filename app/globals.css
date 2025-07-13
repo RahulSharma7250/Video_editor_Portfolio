@@ -1,0 +1,307 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-oswald: "Oswald", sans-serif;
+  --font-playfair: "Playfair Display", serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-oswald);
+  background: #000000;
+  color: #ffffff;
+  cursor: none;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 1px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ccc;
+}
+
+/* Glow effects */
+.glow {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.glow-text {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Cinematic animations */
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.flicker {
+  animation: flicker 2s infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.typing {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #fff;
+  animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #fff;
+  }
+}
+
+/* Grayscale hover effects */
+.grayscale-hover {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.grayscale-hover:hover {
+  filter: grayscale(0%);
+}
+
+/* Film grain effect */
+.film-grain::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+      circle,
+      transparent 20%,
+      rgba(255, 255, 255, 0.02) 21%,
+      rgba(255, 255, 255, 0.02) 34%,
+      transparent 35%,
+      transparent
+    ),
+    linear-gradient(
+      0deg,
+      transparent 24%,
+      rgba(255, 255, 255, 0.01) 25%,
+      rgba(255, 255, 255, 0.01) 26%,
+      transparent 27%,
+      transparent 74%,
+      rgba(255, 255, 255, 0.01) 75%,
+      rgba(255, 255, 255, 0.01) 76%,
+      transparent 77%,
+      transparent
+    );
+  background-size: 3px 3px;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* Clean spacing utilities */
+.section-spacing {
+  padding: 3rem 0;
+}
+
+.section-spacing-large {
+  padding: 4.5rem 0;
+}
+
+.container-clean {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container-clean {
+    padding: 0 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-clean {
+    padding: 0 4rem;
+  }
+}
+
+/* Cleaner text hierarchy */
+.text-hierarchy-1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.text-hierarchy-2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.text-hierarchy-3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+
+/* Cleaner card spacing */
+.card-clean {
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .card-clean {
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Better grid spacing */
+.grid-clean {
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .grid-clean {
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-clean {
+    gap: 2rem;
+  }
+}
+
+/* Clean section spacing */
+.section-clean {
+  padding: 3.5rem 0;
+}
+
+.section-clean-small {
+  padding: 2rem 0;
+}
+
+.section-clean-large {
+  padding: 5rem 0;
+}
+
+/* Content spacing */
+.content-spacing {
+  margin-bottom: 2rem;
+}
+
+.content-spacing-small {
+  margin-bottom: 1.5rem;
+}
+
+.content-spacing-large {
+  margin-bottom: 2.5rem;
+}
+
+/* Grid clean spacing */
+.grid-spacing-clean {
+  gap: 1.5rem;
+}
+
+.grid-spacing-clean-small {
+  gap: 1rem;
+}
+
+.grid-spacing-clean-large {
+  gap: 2rem;
+}
+
+/* Element spacing */
+.element-spacing {
+  margin-bottom: 1rem;
+}
+
+.element-spacing-large {
+  margin-bottom: 1.5rem;
+}
+
+/* Section dividers */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+  margin: 2.5rem 0;
+}
+
+.section-divider-large {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+  margin: 3.5rem 0;
+}
+
+/* Clean containers */
+.container-spacing {
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container-spacing {
+    padding: 0 3rem;
+  }
+
+  .section-clean {
+    padding: 4.5rem 0;
+  }
+
+  .grid-spacing-clean {
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-spacing {
+    padding: 0 4rem;
+  }
+
+  .section-clean {
+    padding: 5.5rem 0;
+  }
+
+  .grid-spacing-clean {
+    gap: 2.5rem;
+  }
+}
