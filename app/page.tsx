@@ -39,7 +39,7 @@ const showcaseVideo = {
     title: "CINEMATIC SHOWREEL 2024",
     description:
       "A comprehensive showcase of my latest work featuring music videos, commercial films, and creative projects that demonstrate the full spectrum of cinematic storytelling.",
-    videoUrl: "videos/gc_marketing.mp4",
+    videoUrl: "videos/gc_edit.mp4",
     duration: "3:45",
     category: "Showreel",
 }
@@ -58,14 +58,14 @@ const showcaseVideo = {
             className="w-full h-full object-cover opacity-90"
             poster="/placeholder.svg?height=1080&width=1920"
           >
-            <source src="/videos/GC MARKETING.mp4" type="video/mp4" />
+            <source src="/videos/gc_edit.mp4" type="video/mp4" />
             {/* Fallback videos */}
             <source
-              src="videos/gc_marketing.mp4"
+              src="videos/gc_edit.mp4"
               type="video/mp4"
             />
             <source
-              src="videos/gc_marketing.mp4"
+              src="videos/gc_edit.mp4"
               type="video/webm"
             />
             Your browser does not support the video tag.
@@ -152,9 +152,9 @@ const showcaseVideo = {
             <ScrollReveal direction="left">
               <div className="relative">
                 <img
-                  src="/gc.jpg?height=600&width=500"
+                  src="/gc4.jpg?height=600&width=500"
                   alt="Behind the Camera"
-                  className="w-full h-[600px] object-cover grayscale-hover"
+                  className="w-full h-[600px] object-cover image-hover"
                 />
                 <div className="absolute inset-0 film-grain" />
                 <div className="absolute bottom-6 left-6 right-6 bg-black/80 p-4 rounded">
@@ -362,7 +362,7 @@ const showcaseVideo = {
                     <img
                       src={item.thumbnail || "/placeholder.svg"}
                       alt={item.title}
-                      className="w-full h-full object-cover grayscale-hover group-hover:scale-105 transition-all duration-500"
+                      className="w-full h-full object-cover image-hover group-hover:scale-105 transition-all duration-500"
                     />
                   </div>
                   <h3 className="text-2xl font-oswald font-bold element-spacing tracking-wider group-hover:glow-text transition-all duration-300">

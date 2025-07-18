@@ -6,7 +6,7 @@ import { CustomCursor } from "@/components/custom-cursor"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 import { Navigation } from "@/components/navigation"
 import { PageTransition } from "@/components/page-transition"
-import { Preloader } from "@/components/preloader"
+// import { Preloader } from "@/components/preloader"
 import { Footer } from "@/components/footer"
 
 const oswald = Oswald({
@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${oswald.variable} ${playfair.variable} bg-black text-white overflow-x-hidden`}>
-        <Preloader />
+        {/* <Preloader /> */}
         <CustomCursor />
         <Navigation />
         <PageTransition>{children}</PageTransition>

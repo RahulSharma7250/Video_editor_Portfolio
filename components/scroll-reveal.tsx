@@ -1,43 +1,66 @@
 "use client"
 
-import type React from "react"
-
-import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
+import type { ReactNode } from "react"
+
+type MarginType = 
+  | string 
+  | number 
+  | { 
+      top?: number 
+      right?: number 
+      bottom?: number 
+      left?: number 
+    }
 
 interface ScrollRevealProps {
-  children: React.ReactNode
+  children: ReactNode
   direction?: "up" | "down" | "left" | "right"
   delay?: number
   className?: string
+  once?: boolean
+  margin?: MarginType
+  duration?: number
 }
 
-export function ScrollReveal({ children, direction = "up", delay = 0, className = "" }: ScrollRevealProps) {
+export function ScrollReveal({ 
+  children, 
+  direction = "up", 
+  delay = 0, 
+  className = "", 
+  once = true,
+  margin = "-20%",
+  duration = 0.6
+}: ScrollRevealProps) {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const isInView = useInView(ref, { 
+    once, 
+     // Now properly typed
+    amount: 0.1
+  })
 
-  const variants = {
-    hidden: {
-      opacity: 0,
-      y: direction === "up" ? 50 : direction === "down" ? -50 : 0,
-      x: direction === "left" ? 50 : direction === "right" ? -50 : 0,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      x: 0,
-    },
+  const getHiddenTransform = () => {
+    switch (direction) {
+      case "up": return { y: 30 }
+      case "down": return { y: -30 }
+      case "left": return { x: 30 }
+      case "right": return { x: -30 }
+      default: return { y: 30 }
+    }
   }
 
   return (
     <motion.div
       ref={ref}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={variants}
+      initial={{ opacity: 0, ...getHiddenTransform() }}
+      animate={isInView ? { 
+        opacity: 1, 
+        y: 0, 
+        x: 0 
+      } : {}}
       transition={{
-        duration: 0.8,
+        duration,
         delay,
         ease: [0.22, 1, 0.36, 1],
       }}

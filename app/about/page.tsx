@@ -59,7 +59,7 @@ export default function AboutPage() {
             <ScrollReveal direction="left">
               <div className="relative">
                 <img
-                  src="/cg1.jpg?height=600&width=500"
+                  src="/gc3.jpg?height=600&width=500"
                   alt="Videographer Portrait"
                   className="w-full h-[600px] object-cover grayscale-hover"
                 />

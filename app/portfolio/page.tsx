@@ -1,8 +1,8 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Play, X, Calendar, Eye, Award, ExternalLink } from "lucide-react"
+import { Play, X, ExternalLink, Eye, Award, Calendar } from "lucide-react"
 
 const categories = ["All", "Music", "Commercial", "Creative"]
 
@@ -112,17 +112,14 @@ const featuredProjects = projects.slice(0, 3)
 
 export default function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState("All")
-  const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(null)
-  const [isClient, setIsClient] = useState(false)
+  type Project = typeof projects[number]
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
 
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
+  const filteredProjects = activeCategory === "All" 
+    ? projects 
+    : projects.filter(project => project.category === activeCategory)
 
-  const filteredProjects =
-    activeCategory === "All" ? projects : projects.filter((project) => project.category === activeCategory)
-
-  const handleProjectClick = (project: (typeof projects)[0]) => {
+  const handleProjectClick = (project: Project) => {
     if (project.youtubeUrl) {
       window.open(project.youtubeUrl, "_blank")
     } else {
@@ -130,27 +127,36 @@ export default function PortfolioPage() {
     }
   }
 
-  if (!isClient) {
-    return (
-      <div className="min-h-screen pt-20 flex items-center justify-center">
-        <div className="animate-pulse">Loading...</div>
-      </div>
-    )
-  }
-
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen bg-black text-white pt-20">
       {/* Header */}
       <section className="py-20 px-6 md:px-12 lg:px-16">
         <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-bold tracking-wider mb-8">PORTFOLIO</h1>
-
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-5xl md:text-7xl font-bold tracking-wider mb-8"
+          >
+            PORTFOLIO
+          </motion.h1>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-xl text-gray-300 max-w-3xl mx-auto mb-8"
+          >
             A curated collection of cinematic stories, each crafted with passion and precision to capture the essence
             of every moment and create lasting impact.
-          </p>
+          </motion.p>
 
-          <div className="flex flex-wrap justify-center gap-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex flex-wrap justify-center gap-4"
+          >
             <div className="flex items-center gap-2 px-4 py-2 border border-white/30">
               <Eye className="w-4 h-4" />
               <span className="text-sm tracking-wider">10M+ VIEWS</span>
@@ -159,21 +165,29 @@ export default function PortfolioPage() {
               <Play className="w-4 h-4" />
               <span className="text-sm tracking-wider">400+ PROJECTS</span>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Featured Projects */}
       <section className="py-20 px-6 md:px-12 lg:px-16 bg-white/5">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 tracking-wider">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="text-4xl md:text-5xl font-bold text-center mb-16 tracking-wider"
+          >
             FEATURED WORK
-          </h2>
+          </motion.h2>
 
           <div className="grid lg:grid-cols-3 gap-8">
-            {featuredProjects.map((project) => (
+            {featuredProjects.map((project, index) => (
               <motion.div
                 key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -10 }}
                 className="group cursor-pointer"
                 onClick={() => handleProjectClick(project)}
@@ -224,7 +238,12 @@ export default function PortfolioPage() {
       </section>
 
       {/* Category Filter */}
-      <section className="px-6 md:px-12 lg:px-16 mb-12">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="px-6 md:px-12 lg:px-16 mb-12"
+      >
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-wrap justify-center gap-4">
             {categories.map((category) => (
@@ -244,10 +263,15 @@ export default function PortfolioPage() {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* All Projects Grid */}
-      <section className="px-6 md:px-12 lg:px-16 pb-20">
+      <motion.section
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="px-6 md:px-12 lg:px-16 pb-20"
+      >
         <div className="max-w-7xl mx-auto">
           <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <AnimatePresence>
@@ -296,7 +320,7 @@ export default function PortfolioPage() {
             </AnimatePresence>
           </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Project Modal */}
       <AnimatePresence>
@@ -323,37 +347,37 @@ export default function PortfolioPage() {
                   <X className="w-6 h-6" />
                 </button>
 
-                <div className="aspect-video bg-gray-900">
+                {/* <div className="aspect-video bg-gray-900">
                   <img
                     src={selectedProject.thumbnail}
                     alt={selectedProject.title}
                     className="w-full h-full object-cover"
                   />
-                </div>
+                </div> */}
 
                 <div className="p-8">
                   <div className="grid md:grid-cols-3 gap-8">
                     <div className="md:col-span-2">
-                      <div className="flex items-center gap-4 mb-4">
+                      {/* <div className="flex items-center gap-4 mb-4">
                         <h2 className="text-3xl font-bold tracking-wider">{selectedProject.title}</h2>
                         <span className="px-3 py-1 bg-white/10 text-sm tracking-wider">
                           {selectedProject.category}
                         </span>
-                      </div>
+                      </div> */}
 
                       {selectedProject.awards.length > 0 && (
                         <div className="mb-6">
                           <h4 className="text-sm tracking-wider text-gray-400 mb-3">
                             AWARDS & RECOGNITION
                           </h4>
-                          <div className="flex flex-wrap gap-2">
+                          {/* <div className="flex flex-wrap gap-2">
                             {selectedProject.awards.map((award, idx) => (
                               <span key={idx} className="px-3 py-1 bg-white/10 text-sm tracking-wider">
                                 <Award className="w-4 h-4 inline mr-2" />
                                 {award}
                               </span>
                             ))}
-                          </div>
+                          </div> */}
                         </div>
                       )}
 
